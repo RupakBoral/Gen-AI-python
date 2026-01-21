@@ -15,7 +15,7 @@ print(res1)
 print("----------------------------------")
 
 res2 = fn2() # object of generator fn2 reference to the address of the generator
-# print(res2)
+# print(res2)   # res is pointing to start of function before the yield
 
 # printing the values 
 while(res2):

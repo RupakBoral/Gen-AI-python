@@ -1,5 +1,6 @@
-import threading
+from threading import Thread
 import requests
+import time
 
 def download_image(url):
     print("Starting to download image")
@@ -9,29 +10,21 @@ def download_image(url):
 urls = [
     'https://httpbin.org/image/jpeg',
     'https://httpbin.org/image/png',
-    'https://httpbin.org/image/jpg',
+    'https://httpbin.org/image/svg',
 ]
 
-out of india
-1. Twilio
-2. Vonage
-3. Telnyx
-4. Pivilio
+threads = []
 
+start_time = time.time()
 
-India:
-1. Exotel
+for url in urls:
+    t = Thread(target=download_image, args=(url, ))
+    t.start()
+    threads.append(t)
+    
+for t in threads:
+    t.join()
+    
+end_time = time.time()
 
-'2483bbdc-583d-4f59-8b88-49aec1d24901',
-'39aeeed1-29f0-4a0c-ad21-80ae726a41f1',
-'b1fcf760-7135-4da8-a8d9-a2b60263736e',
-'4a730f70-1c3d-46bf-87f8-a1bef169cc7d',
-'a1f4de12-6e1b-4c26-8d64-90f7a92154cf'
-
-SELECT * FROM "user" WHERE id IN (
-'1085c83b-c735-4dcb-b78c-fe6ef4963e54'
-,'9709a3b1-dcd2-4282-87f2-e11b290cc085'
-,'a0afd8a8-821a-44d0-919d-554ef2b4c7b7'
-,'1772cefb-6ae7-4bb6-bda2-6cd44e7a1253'
-,'0be7d2aa-df4d-4772-98a3-459e79d2f8b1'
-);
+print(f"All file downloded in {end_time - start_time:.2f} secs")
